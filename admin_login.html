@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    
+    <meta charset="UTF-8">
+    <title>Admin Login</title>
+    <link rel="stylesheet" href="CSS/style.css">
+    <script>
+    // Empêche de revenir à la page précédente avec le bouton "retour"
+    window.history.pushState(null, "", window.location.href);
+    window.onpopstate = function () {
+        window.history.pushState(null, "", window.location.href);
+    };
+</script>
+</head>
+<body>
+    
+    <form action="admin_login.php" method="POST">
+        <h2>Connexion Admin</h2>
+
+        <div class="form-group">
+            <label>Email</label>
+            <input type="email" name="email" required>
+        </div>
+
+        <div class="form-group">
+            <label>Mot de passe</label>
+            <input type="password" name="password" required>
+        </div>
+
+        <button type="submit">Se connecter</button>
+    </form>
+</body>
+</html>

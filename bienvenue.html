@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Bienvenue à BTS Banque</title>
+    <style>
+        /* Base */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-image: url(BTS.jpg);
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        form {
+            background-color:rgb(118, 6, 6);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 0 15px rgb(118, 6, 6);
+            width: 100%;
+            max-width: 800px;
+        }
+
+        /* Titre */
+        h2 {
+            text-align: center;
+            margin-bottom: 25px;
+            color: #ffffff;
+        }
+
+        /* Groupes */
+        .form-group {
+            margin-bottom: 20px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #ffffff;
+        }
+
+        input {
+            padding: 10px;
+            border-radius: 8px;
+            border: none;
+            outline: none;
+            font-size: 16px;
+        }
+
+        /* Pour mettre nom et prénom côte à côte */
+        .row {
+            display: flex;
+            gap: 20px;
+        }
+
+        .row .form-group {
+            flex: 1;
+        }
+
+        /* Bouton */
+        #btn1,#btn2 {
+            width: 100%;
+            padding: 12px;
+            font-size: 20px;
+            background-color: #a91717;
+            color: #ffffff;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+
+        
+       #btn1:hover {
+            background-color: #5c0303;
+        }
+
+        #btn2:hover {
+            background-color: #5c0303;
+        }
+        /* Lien retour ou login */
+        a {
+
+            color: #ffd6d6;
+            text-decoration: none;
+            font-size: 30px;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .container {
+            text-align: center;
+        }
+
+        .form-group {
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+}
+        .container a {
+            display: block;
+            margin: 15px 0;
+            width: 300px;
+        }
+    </style>
+</head>
+<body>
+
+    <form>
+        <div class="container">
+            <h1>Bienvenue à BTS Banque</h1>
+            <img src="BTS-Bank.jpg">
+         <div class="row"  >
+            
+            <a href="index.html" class="form-group" id="btn1" > Connexion Client</a>
+            <a href="admin_login.html" class="form-group" id="btn2" > Connexion Admin</a>
+       
+    </div>
+    </div>
+    </form>
+
+</body>
+</html>
