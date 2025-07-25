@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Découvrir BTS Banque</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Segoe+UI:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #8b1d15ff 0%, #a24b4bff 100%);
+      color: #333;
+      min-height: 100vh;
+    }
+
+    .header-main {
+      background: linear-gradient(135deg, #721e1e, #982a2a);
+      color: white;
+      padding: 15px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      border-radius: 0 0 15px 15px;
+    }
+
+    .header-main h1 {
+      margin: 0;
+      font-size: 1.8rem;
+      font-weight: 600;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin-left: 25px;
+      font-weight: 500;
+      padding: 10px 15px;
+      border-radius: 25px;
+      transition: all 0.3s ease;
+    }
+
+    nav a:hover {
+      background-color: rgba(255,255,255,0.2);
+      transform: translateY(-2px);
+      text-decoration: none;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 40px auto;
+      padding: 0 20px;
+    }
+
+    .page-header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .page-header h1 {
+      color: #721e1e;
+      font-size: 2.5rem;
+      margin: 0;
+      font-weight: 700;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .section {
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 15px;
+      padding: 35px;
+      margin-bottom: 30px;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+      border: 2px solid rgba(30, 60, 114, 0.1);
+      transition: all 0.3s ease;
+    }
+
+    .section:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 35px rgba(0,0,0,0.15);
+    }
+
+    h2 {
+      color: #1e3c72;
+      margin-bottom: 20px;
+      font-size: 1.8rem;
+      font-weight: 600;
+      position: relative;
+      padding-bottom: 15px;
+    }
+
+    h2::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 60px;
+      height: 3px;
+      background: linear-gradient(135deg, #ff416c, #ff4b2b);
+      border-radius: 2px;
+    }
+
+
+
+    .values-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 25px;
+      margin-top: 25px;
+    }
+
+    .value-item {
+      background: linear-gradient(135deg, rgba(30, 60, 114, 0.05), rgba(42, 82, 152, 0.05));
+      padding: 25px;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+      transition: all 0.3s ease;
+      border: 1px solid rgba(30, 60, 114, 0.1);
+    }
+
+    .value-item:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+      border-color: #721e1e;
+    }
+
+    .value-item strong {
+      color: #721e1e;
+      font-size: 1.2rem;
+      display: block;
+      margin-bottom: 10px;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 25px;
+      margin-top: 25px;
+    }
+
+    .stat-card {
+      background: linear-gradient(135deg, #721e1e, #982a2a);
+      color: white;
+      padding: 30px 20px;
+      border-radius: 15px;
+      text-align: center;
+      box-shadow: 0 8px 25px rgba(30, 60, 114, 0.3);
+      transition: all 0.3s ease;
+    }
+
+    .stat-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 12px 35px rgba(30, 60, 114, 0.4);
+    }
+
+    .stat-card h3 {
+      font-size: 2.2rem;
+      margin: 0 0 10px 0;
+      font-weight: 700;
+    }
+
+    .stat-card p {
+      color: white;
+      margin: 0;
+      font-size: 1.1rem;
+      font-weight: 500;
+    }
+
+    footer {
+      background: linear-gradient(135deg, #721e1e, #982a2a);
+      color: white;
+      text-align: center;
+      padding: 25px;
+      margin-top: 50px;
+      border-radius: 20px 20px 0 0;
+      font-weight: 500;
+    }
+
+    @media (max-width: 768px) {
+      .header-main {
+        flex-direction: column;
+        padding: 15px;
+      }
+      
+      nav {
+        margin-top: 15px;
+      }
+      
+      nav a {
+        margin: 5px 10px;
+        padding: 8px 12px;
+        font-size: 0.9rem;
+      }
+      
+      .page-header h1 {
+        font-size: 2rem;
+      }
+      
+      .section {
+        padding: 25px;
+      }
+      
+      h2 {
+        font-size: 1.5rem;
+      }
+      
+      .values-list, .stats {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="header-main">
+    <h1>BTS Banque</h1>
+    <nav>
+      <a href="bienvenue.html"><i class="fas fa-home"></i> Accueil</a>
+      <a href="services.html"><i class="fas fa-concierge-bell"></i> Nos Services</a>
+      <a href="contacts.html"><i class="fas fa-envelope"></i> Contact</a>
+    </nav>
+  </header>
+
+  <div class="container">
+    <div class="page-header">
+      <h1>Découvrir BTS Banque</h1>   
+      
+    </div>
+
+    <div class="section">
+      <h2>Qui sommes-nous ?</h2>
+      <p>Créée pour favoriser l'accès au financement pour les jeunes, les entrepreneurs et les familles à revenus modestes, la BTS Banque joue un rôle clé dans le développement économique inclusif en Tunisie. Nous sommes une institution publique dédiée à l'inclusion financière depuis plus de 30 ans.</p>
+    </div>
+
+    <div class="section">
+      <h2>Notre Mission</h2>
+      <p>Contribuer à l'inclusion financière des jeunes promoteurs, des entreprises sociales et des régions à faible densité d'investissement. Nous soutenons les projets innovants et accompagnons les entrepreneurs dans la réalisation de leurs ambitions.</p>
+    </div>
+
+    <div class="section">
+      <h2>Notre Vision</h2>
+      <p>Être la banque leader du développement inclusif et durable en Tunisie, en soutenant l'innovation, l'entrepreneuriat et l'économie sociale et solidaire. Nous aspirons à créer un impact positif dans chaque communauté que nous servons.</p>
+    </div>
+
+    <div class="section">
+      <h2>Nos Valeurs</h2>
+      <div class="values-list">
+        <div class="value-item">
+          <strong><i class="fas fa-handshake"></i> Engagement</strong>
+          <p>Nous nous engageons pour un développement équitable et soutenable.</p>
+        </div>
+        <div class="value-item">
+          <strong><i class="fas fa-universal-access"></i> Accessibilité</strong>
+          <p>Des solutions financières ouvertes et accessibles à tous les citoyens.</p>
+        </div>
+        <div class="value-item">
+          <strong><i class="fas fa-map-marker-alt"></i> Proximité</strong>
+          <p>Nous accompagnons nos clients à chaque étape de leur parcours.</p>
+        </div>
+        <div class="value-item">
+          <strong><i class="fas fa-balance-scale"></i> Responsabilité</strong>
+          <p>Une finance orientée impact social et humain.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Chiffres Clés</h2>
+      <div class="stats">
+        <div class="stat-card">
+          <h3>+500K</h3>
+          <p>Clients accompagnés</p>
+        </div>
+        <div class="stat-card">
+          <h3>30+</h3>
+          <p>Années d'expertise</p>
+        </div>
+        <div class="stat-card">
+          <h3>24</h3>
+          <p>Bureaux régionaux</p>
+        </div>
+        <div class="stat-card">
+          <h3>+200M DT</h3>
+          <p>Crédits octroyés en 2024</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <footer>
+    BTS Banque © 2025 – Tous droits réservés
+  </footer>
+
+</body>
+</html>

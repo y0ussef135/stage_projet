@@ -1,135 +1,465 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <title>Bienvenue à BTS Banque</title>
-    <style>
-        /* Base */
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-image: url(BTS.jpg);
-            background-size: cover;
-            background-repeat: no-repeat;
-            background-position: center;
-            color: #fff;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            margin: 0;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bienvenue à BTS Banque</title>
+  <link href="https://fonts.googleapis.com/css2?family=Segoe+UI:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: url('IMG/BTS.jpg') no-repeat center center/cover;
+      backdrop-filter: blur(5px);
+      min-height: 100vh;
+    }
 
-        form {
-            background-color:rgb(118, 6, 6);
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0 0 15px rgb(118, 6, 6);
-            width: 100%;
-            max-width: 800px;
-        }
+    .header-main {
+      background: linear-gradient(135deg, #721e1e, #982a2a);
+      color: white;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 30px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      border-radius: 0 0 15px 15px;
+    }
+²
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
 
-        /* Titre */
-        h2 {
-            text-align: center;
-            margin-bottom: 25px;
-            color: #ffffff;
-        }
+    .logo img {
+      height: 60px;
+      filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+    }
 
-        /* Groupes */
-        .form-group {
-            margin-bottom: 20px;
-            display: flex;
-            flex-direction: column;
-        }
+    .logo h2 {
+      font-size: 1.8rem;
+      font-weight: 600;
+    }
 
-        label {
-            margin-bottom: 5px;
-            font-weight: bold;
-            color: #ffffff;
-        }
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin: 0 20px;
+      font-weight: 500;
+      padding: 10px 15px;
+      border-radius: 25px;
+      transition: all 0.3s ease;
+    }
 
-        input {
-            padding: 10px;
-            border-radius: 8px;
-            border: none;
-            outline: none;
-            font-size: 16px;
-        }
+    nav a:hover {
+      background-color: rgba(255,255,255,0.2);
+      transform: translateY(-2px);
+    }
 
-        /* Pour mettre nom et prénom côte à côte */
-        .row {
-            display: flex;
-            gap: 20px;
-        }
+    .hero {
+      text-align: center;
+      color: white;
+      padding: 80px 20px 50px;
+      background: rgba(114, 30, 30, 0.85);
+      margin: 30px auto;
+      max-width: 1200px;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    }
 
-        .row .form-group {
-            flex: 1;
-        }
+    .hero h1 {
+      font-size: 3rem;
+      margin-bottom: 20px;
+      font-weight: 700;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+    }
 
-        /* Bouton */
-        #btn1,#btn2 {
-            width: 100%;
-            padding: 12px;
-            font-size: 20px;
-            background-color: #a91717;
-            color: #ffffff;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: bold;
-            transition: background-color 0.3s ease;
-        }
+    .hero p {
+      font-size: 1.2rem;
+      max-width: 700px;
+      margin: auto;
+      line-height: 1.7;
+    }
 
-        
-       #btn1:hover {
-            background-color: #5c0303;
-        }
+    .actions {
+      margin-top: 40px;
+    }
 
-        #btn2:hover {
-            background-color: #5c0303;
-        }
-        /* Lien retour ou login */
-        a {
+    .actions a {
+      display: inline-block;
+      background: linear-gradient(135deg, #ff4141, #ff4b2b);
+      color: white;
+      padding: 15px 35px;
+      margin: 15px;
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1.1rem;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(255, 65, 108, 0.3);
+    }
 
-            color: #ffd6d6;
-            text-decoration: none;
-            font-size: 30px;
-        }
+    .actions a:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 25px rgba(255, 65, 108, 0.4);
+    }
 
-        a:hover {
-            text-decoration: underline;
-        }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
 
-        .container {
-            text-align: center;
-        }
+    .section-title {
+      color: #721e1e;
+      text-align: center;
+      margin: 40px 0 30px;
+      font-size: 2.2rem;
+      font-weight: 600;
+    }
 
-        .form-group {
-    margin-bottom: 20px;
-    display: flex;
-    flex-direction: column;
-}
-        .container a {
-            display: block;
-            margin: 15px 0;
-            width: 300px;
-        }
-    </style>
+    .about-content {
+      background: rgba(255, 255, 255, 0.95);
+      padding: 40px;
+      border-radius: 20px;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+      margin: 40px auto;
+      max-width: 900px;
+    }
+
+    .about-content p {
+      font-size: 1.1rem;
+      line-height: 1.8;
+      color: #982a2a;
+    }
+
+    .about-content strong {
+      color: #ff416c;
+    }
+
+    .social-icons-png {
+      position: fixed;
+      top: 50%;
+      right: 20px;
+      transform: translateY(-50%);
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      z-index: 999;
+    }
+
+    .social-icons-png img {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+      transition: all 0.3s ease;
+      background: white;
+      padding: 5px;
+    }
+
+    .social-icons-png img:hover {
+      transform: scale(1.15) rotate(10deg);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.4);
+    }
+
+    footer {
+      text-align: center;
+      padding: 30px;
+      background: linear-gradient(135deg, #721e1e, #982a2a);
+      color: white;
+      font-size: 1rem;
+      margin-top: 70px;
+      border-radius: 20px 20px 0 0;
+    }
+
+    footer a {
+      color: #fff;
+      text-decoration: none;
+      margin: 0 15px;
+      transition: all 0.3s ease;
+    }
+
+    footer a:hover {
+      color: #ff416c;
+      text-decoration: underline;
+    }
+
+    /* Carousel Styles */
+    .carousel-container {
+      position: relative;
+      width: 100%;
+      margin: 40px auto;
+      overflow: hidden;
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      max-width: 900px;
+    }
+
+    .carousel-slides {
+      display: flex;
+      transition: transform 0.6s ease-in-out;
+    }
+
+    .carousel-slide {
+      min-width: 100%;
+      text-align: center;
+      background: white;
+      display: none;
+      flex-shrink: 0;
+    }
+
+    .carousel-slide.active {
+      display: block;
+    }
+
+    .carousel-slide img {
+      width: 100%;
+      height: 350px;
+      object-fit: cover;
+      object-position: center;
+      border-top-left-radius: 20px;
+      border-top-right-radius: 20px;
+      display: block;
+    }
+
+    .carousel-slide p {
+      padding: 25px;
+      font-size: 1.1rem;
+      font-weight: 500;
+      color: #751c1c;
+      line-height: 1.6;
+      background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+      margin: 0;
+    }
+
+    .carousel-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 32px;
+      background: linear-gradient(135deg, #1e3c72, #2a5298);
+      color: rgba(255, 255, 255, 0.341);
+      border: none;
+      border-radius: 50%;
+      padding: 12px 18px;
+      cursor: pointer;
+      z-index: 10;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(30, 60, 114, 0.4);
+    }
+
+    .carousel-btn:hover {
+      background: linear-gradient(135deg, #ff416c, #ff4b2b);
+      transform: translateY(-50%) scale(1.1);
+    }
+
+    .carousel-btn.prev { left: 20px; }
+    .carousel-btn.next { right: 20px; }
+
+    .carousel-dots {
+      text-align: center;
+      padding: 20px;
+      background: white;
+      border-bottom-left-radius: 20px;
+      border-bottom-right-radius: 20px;
+    }
+
+    .carousel-dots .dot {
+      display: inline-block;
+      width: 15px;
+      height: 15px;
+      background-color: #bbb;
+      border-radius: 50%;
+      margin: 0 8px;
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+
+    .carousel-dots .dot.active {
+      background: linear-gradient(135deg, #ff416c, #ff4b2b);
+      transform: scale(1.2);
+    }
+
+    @media (max-width: 768px) {
+      .hero h1 {
+        font-size: 2rem;
+      }
+      
+      .hero p {
+        font-size: 1rem;
+      }
+      
+      .header-main {
+        flex-direction: column;
+        padding: 10px;
+      }
+      
+      nav {
+        margin-top: 15px;
+      }
+      
+      nav a {
+        margin: 5px;
+        padding: 8px 12px;
+        font-size: 0.9rem;
+      }
+      
+      .actions a {
+        display: block;
+        margin: 10px auto;
+        padding: 12px 25px;
+        width: 80%;
+      }
+      
+      .carousel-slide img {
+        height: 250px;
+      }
+      
+      .social-icons-png {
+        right: 10px;
+      }
+      
+      .social-icons-png img {
+        width: 40px;
+        height: 40px;
+      }
+    }
+  </style>
 </head>
 <body>
 
-    <form>
-        <div class="container">
-            <h1>Bienvenue à BTS Banque</h1>
-            <img src="BTS-Bank.jpg">
-         <div class="row"  >
-            
-            <a href="index.html" class="form-group" id="btn1" > Connexion Client</a>
-            <a href="admin_login.html" class="form-group" id="btn2" > Connexion Admin</a>
-       
+  <header class="header-main">
+    <div class="logo">
+      <img src="IMG/BTS_Banque.png" alt="Logo BTS Banque">
+      <h2>BTS Banque</h2>
     </div>
+    <nav>
+      <a href="#"><i class="fas fa-home"></i> Accueil</a>
+      <a href="services.html"><i class="fas fa-concierge-bell"></i> Nos Services</a>
+      <a href="contacts.html"><i class="fas fa-envelope"></i> Contact</a>
+      <a href="index.html"><i class="fas fa-sign-in-alt"></i> Connexion</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <h1>Bienvenue à BTS Banque</h1>
+    <p>Votre partenaire de confiance pour tous vos besoins bancaires. Découvrez nos services, suivez vos demandes de prêts et plus encore.</p>
+    <div class="actions">
+      <a href="index.html"><i class="fas fa-sign-in-alt"></i> Se connecter</a>
+      <a href="découvrir.html"><i class="fas fa-search"></i> Découvrir</a>
     </div>
-    </form>
+  </section>
+
+  <div class="container">
+    <h2 class="section-title">Nos Offres Actuelles</h2>
+
+    <div class="carousel-container">
+      <div class="carousel-slides">
+        <div class="carousel-slide active">
+          <img src="IMG/Teratec-1.png" alt="Crédit conso">
+          <p>قروض لفائدة الفئات الضعيفة و محدودة الدخل لتمويل أنشطة في كافة المجالات الاقتصادية</p>
+        </div>
+        <div class="carousel-slide">
+          <img src="IMG/BTS.jpg" alt="Prêt immobilier">
+          <p>تمويل الشركات الأهلية<br>قروض ضمن خط التمويل المذكور إلى الشركات الأهلية الجهوية أو المحليّة حسب الفصل 29 من قانون المالية لسنة2023.</p>
+        </div>
+        <div class="carousel-slide">
+          <img src="IMG/carte-BTS.jpg" alt="Compte en ligne">
+          <p>Carte VISA BTS : Votre choix idéal<br>La BTS BANK met à la disposition de sa clientèle la Carte VISA BTS.</p>
+        </div>
+      </div>
+
+      <button class="carousel-btn prev">&#10094;</button>
+      <button class="carousel-btn next">&#10095;</button>
+
+      <div class="carousel-dots">
+        <span class="dot active"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+      </div>
+    </div>
+
+    <div class="about-content">
+      <h2 style="color: #721e1e; text-align: center; margin-bottom: 25px;">À propos de la BTS Banque</h2>
+      <p>
+        Créée en 1997, la <strong>BTS Banque</strong> (Banque Tunisienne de Solidarité) est une institution publique dédiée à l'inclusion financière.
+        Elle soutient les jeunes promoteurs, les petits entrepreneurs et les familles à revenu modeste à travers des crédits adaptés,
+        des conseils personnalisés et un accompagnement de proximité. Notre mission est de contribuer à un développement économique équitable, solidaire et durable en Tunisie.
+      </p>
+    </div>
+  </div>
+
+  <div class="social-icons-png">
+    <a href="https://www.facebook.com/bts.bank.officiel" target="_blank" title="Facebook">
+      <img src="IMG/Facebook_Logo_(2019).png" alt="Facebook">
+    </a>
+    <a href="https://twitter.com/" target="_blank" title="Twitter">
+      <img src="IMG/twitter-3-logo-png-transparent.png" alt="Twitter">
+    </a>
+    <a href="https://www.linkedin.com/company/bts-bank/?originalSubdomain=tn" target="_blank" title="LinkedIn">
+      <img src="IMG/hd-vector-flat-linkedin-in-round-icon-png-701751695046390m4phkuuiqm.png" alt="LinkedIn">
+    </a>
+  </div>
+
+  <footer>
+    <p>&copy; 2025 BTS Banque | <a href="#">Conditions d'utilisation</a> | <a href="#">Politique de confidentialité</a></p>
+  </footer>
+
+  <script>
+    const slides = document.querySelectorAll('.carousel-slide');
+    const dots = document.querySelectorAll('.dot');
+    const prevBtn = document.querySelector('.carousel-btn.prev');
+    const nextBtn = document.querySelector('.carousel-btn.next');
+
+    let currentIndex = 0;
+    let interval = setInterval(showNextSlide, 5000);
+
+    function showSlide(index) {
+      slides.forEach((slide, i) => {
+        slide.classList.toggle('active', i === index);
+        dots[i].classList.toggle('active', i === index);
+      });
+      currentIndex = index;
+    }
+
+    function showNextSlide() {
+      let nextIndex = (currentIndex + 1) % slides.length;
+      showSlide(nextIndex);
+    }
+
+    function showPrevSlide() {
+      let prevIndex = (currentIndex - 1 + slides.length) % slides.length;
+      showSlide(prevIndex);
+    }
+
+    nextBtn.addEventListener('click', () => {
+      showNextSlide();
+      resetTimer();
+    });
+
+    prevBtn.addEventListener('click', () => {
+      showPrevSlide();
+      resetTimer();
+    });
+
+    dots.forEach((dot, i) => {
+      dot.addEventListener('click', () => {
+        showSlide(i);
+        resetTimer();
+      });
+    });
+
+    function resetTimer() {
+      clearInterval(interval);
+      interval = setInterval(showNextSlide, 5000);
+    }
+  </script>
 
 </body>
 </html>

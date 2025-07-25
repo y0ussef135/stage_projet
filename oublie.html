@@ -1,16 +1,107 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="CSS/style2.css">
-    <title>Document</title>
+    <title>Mot de passe oublié</title>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        form {
+            background: #ffffff;
+            padding: 2.5rem;
+            border-radius: 16px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+            width: 100%;
+            max-width: 420px;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 1.5rem;
+            font-size: 1.8rem;
+            color: #8B0000;
+        }
+
+        label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        input[type="text"],
+        input[type="email"] {
+            width: 100%;
+            padding: 0.75rem;
+            border-radius: 10px;
+            border: 1px solid #ccc;
+            background-color: #fafafa;
+            margin-bottom: 1.5rem;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        input[type="text"]:focus {
+            outline: none;
+            border-color: #b30000;
+        }
+
+        input[type="button"] {
+            width: 100%;
+            padding: 0.75rem;
+            background: linear-gradient(to right, #8B0000, #B22222);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-weight: bold;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        input[type="button"]:hover {
+            background: linear-gradient(to right, #5a0000, #8B0000);
+        }
+
+        .message {
+            text-align: center;
+            margin-top: 1rem;
+            color: #555;
+        }
+    </style>
 </head>
 <body>
+
     <form action="">
-        <label for="">votre email :</label>
-        <input type="text" name="email" id="email" required>
-        <input type="button" value="confirmer" onclick="alert('Un email de réinitialisation a été envoyé à votre adresse.');">
+        <h2>Mot de passe oublié ?</h2>
+        <label for="email">Votre adresse email :</label>
+        <input type="text" name="email" id="email" placeholder="exemple@email.com" required>
+
+        <input type="button" value="Confirmer" onclick="confirmReset()">
+
+        <div class="message" id="message"></div>
     </form>
+
+    <script>
+        function confirmReset() {
+            const email = document.getElementById('email').value.trim();
+            if (email === "") {
+                alert("Veuillez entrer une adresse email valide.");
+            } else {
+                document.getElementById("message").innerText = 
+                    "📧 Un email de réinitialisation a été envoyé à " + email;
+            }
+        }
+    </script>
+
 </body>
 </html>

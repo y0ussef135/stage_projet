@@ -1,4 +1,3 @@
-
 <?php
 require_once("include/connection.php");
 
@@ -10,14 +9,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $prenom = trim($_POST['prenom']);
     $email = trim($_POST['email']);
     $password = $_POST['password'];
-    $date_naissance = $_POST['date_naissance'];
-    $lieu_naissance = trim($_POST['lieu_naissance']);
-    $carte_postale = trim($_POST['carte_postale']);
-    $adresse = trim($_POST['adresse']);
-    $cin_passeport = trim($_POST['cin_passeport']);
-    $telephone = trim($_POST['telephone']);
 
-    // Validations (كما في الرد السابق)
+    // Validations 
     if (empty($nom) || strlen($nom) < 2) {
         $errors[] = "Le nom est requis et doit contenir au moins 2 caractères.";
     }
@@ -34,31 +27,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $errors[] = "Le mot de passe doit contenir au moins 6 caractères.";
     }
 
-    if (empty($date_naissance)) {
-        $errors[] = "La date de naissance est requise.";
-    }
-
-    if (empty($lieu_naissance)) {
-        $errors[] = "Le lieu de naissance est requis.";
-    }
-
-    if (!preg_match("/^[0-9]{4,10}$/", $carte_postale)) {
-        $errors[] = "Code postal invalide (4 à 10 chiffres).";
-    }
-
-    if (strlen($adresse) < 5) {
-        $errors[] = "L'adresse doit contenir au moins 5 caractères.";
-    }
-
-    if (empty($cin_passeport)) {
-        $errors[] = "CIN ou passeport est requis.";
-    }
-
-    if (!preg_match("/^[0-9]{8,15}$/", $telephone)) {
-        $errors[] = "Numéro de téléphone invalide (entre 8 et 15 chiffres).";
-    }
-
-    $check = $conn->prepare("SELECT id FROM client WHERE email = ?");
+    // Vérifier si l'email est déjà utilisé
+    $check = $conn->prepare("SELECT id FROM user WHERE email = ?");
     $check->bind_param("s", $email);
     $check->execute();
     $check->store_result();
@@ -67,17 +37,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
     $check->close();
 
+    // Si tout est valide
     if (empty($errors)) {
         $password_hash = password_hash($password, PASSWORD_DEFAULT);
-        $sql = "INSERT INTO client (nom, prenom, email, password, date_naissance, lieu_naissance, carte_postale, adresse, cin_passeport, telephone)
-                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        $sql = "INSERT INTO user (nom, prenom, email, password) VALUES (?, ?, ?, ?)";
         $stmt = $conn->prepare($sql);
-        $stmt->bind_param("ssssssssss", $nom, $prenom, $email, $password_hash, $date_naissance, $lieu_naissance, $carte_postale, $adresse, $cin_passeport, $telephone);
+        $stmt->bind_param("ssss", $nom, $prenom, $email, $password_hash);
 
         if ($stmt->execute()) {
-            echo "Inscription réussie. <a href='index.html'>Se connecter</a>";
+            echo "Inscription réussie. <a href=''>Se connecter</a>";
+            header("Location: index.html");
         } else {
-            echo " Erreur : " . $conn->error;
+            echo "Erreur : " . $conn->error;
         }
 
         $stmt->close();

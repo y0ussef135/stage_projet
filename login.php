@@ -2,45 +2,62 @@
 session_start();
 require_once("include/connection.php");
 
+
+// Désactiver le cache pour empêcher le retour arrière
+header("Cache-Control: no-cache, no-store, must-revalidate"); // HTTP 1.1
+header("Pragma: no-cache"); // HTTP 1.0
+header("Expires: 0"); // Proxies
+
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = $_POST['email'] ?? '';
     $password = $_POST['password'] ?? '';
 
-    $sql = "SELECT * FROM client WHERE email = ?";
+    $sql = "SELECT * FROM user WHERE email = ?";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("s", $email);
     $stmt->execute();
     $result = $stmt->get_result();
-    $client = $result->fetch_assoc();
+    $user = $result->fetch_assoc();
     $stmt->close();
 
-    if ($client) {
-        if ($client['Etat'] === 'vérrouillé') {
+    if ($user) {
+        if ($user['Etat'] === 'vérrouillé') {
             echo "<script>alert('Votre compte est désactivé. Veuillez contacter le support.'); window.location.href='index.html';</script>";
             exit();
         }
 
-        if (password_verify($password, $client['password'])) {
-            $_SESSION['client_id'] = $client['id'];
-            $_SESSION['nom'] = $client['nom'];
-            $_SESSION['date_creation'] = $client['date_creation'];
-
-            $reset = $conn->prepare("UPDATE client SET nb_cnx = 0 WHERE email = ?");
+        if (password_verify($password, $user['password'])) {
+            // Authentification réussie
+            $_SESSION['user_id'] = $user['id'];
+            $_SESSION['nom'] = $user['nom'];
+            $_SESSION['date_creation'] = $user['date_creation'];
+            $_SESSION['role'] = $user['role'];
+            $_SESSION['email'] = $user['email'];
+            // Réinitialiser les tentatives
+            $reset = $conn->prepare("UPDATE user SET nb_cnx = 0 WHERE email = ?");
             $reset->bind_param("s", $email);
             $reset->execute();
             $reset->close();
 
-            header("Location: acceuil.php");
+            // Redirection selon le rôle
+           
+        if ($user['role'] === 'admin') {
+            header("Location: admin_home.php");
+}        else {
+             header("Location: client_ACCUEIL.php"); 
+}
+
             exit();
         } else {
-            // Mot de passe incorrect → incrémentation
-            $fail = $conn->prepare("UPDATE client SET nb_cnx = nb_cnx + 1 WHERE email = ?");
+            // Mauvais mot de passe
+            $fail = $conn->prepare("UPDATE user SET nb_cnx = nb_cnx + 1 WHERE email = ?");
             $fail->bind_param("s", $email);
             $fail->execute();
             $fail->close();
 
-            // Vérifier si on atteint 3 tentatives
-            $check = $conn->prepare("SELECT nb_cnx FROM client WHERE email = ?");
+            // Vérifier si 3 tentatives échouées
+            $check = $conn->prepare("SELECT nb_cnx FROM user WHERE email = ?");
             $check->bind_param("s", $email);
             $check->execute();
             $res = $check->get_result();
@@ -48,7 +65,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $check->close();
 
             if ($row && $row['nb_cnx'] >= 3) {
-                $lock = $conn->prepare("UPDATE client SET Etat = 'vérrouillé', nb_cnx = 0 WHERE email = ?");
+                $lock = $conn->prepare("UPDATE user SET Etat = 'vérrouillé', nb_cnx = 0 WHERE email = ?");
                 $lock->bind_param("s", $email);
                 $lock->execute();
                 $lock->close();
@@ -68,11 +85,3 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 $conn->close();
 ?>
-
-<!-- Display the counter below the login form -->
-<?php if (isset($_SESSION['login_attempts'])): ?>
-    <div style="text-align:center; margin-top:10px; color:#555;">
-        <script>
-            alert('Nombre de tentatives de connexion : <?php echo $_SESSION['login_attempts']; ?>');
-        </script> </div>
-<?php endif; ?>
