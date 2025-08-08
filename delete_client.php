@@ -10,7 +10,7 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'admin') {
 
 // Vérifier si un ID est passé dans l'URL
 if (!isset($_GET['id']) || !is_numeric($_GET['id'])) {
-    header("Location: admin.php?success=0"); // Redirige avec erreur
+    header("Location: admin_home.php?success=0"); // Redirige avec erreur
     exit();
 }
 
@@ -40,9 +40,9 @@ $stmt_delete_user = $conn->prepare("DELETE FROM user WHERE id = ?");
 $stmt_delete_user->bind_param("i", $client_id);
 
 if ($stmt_delete_user->execute()) {
-    header("Location: admin_home.php?success=1"); // Succès
+    header("Location: admin_clients.php?success=1"); // Succès
 } else {
-    header("Location: admin_home.php?success=0"); // Échec
+    header("Location: admin_clients.php?success=0"); // Échec
 }
 exit();
 ?>

@@ -153,12 +153,12 @@ try {
     }
 
     .btn-clients {
-      background: linear-gradient(135deg, #ff7700ff, #d4b100ff);
+      background: linear-gradient(135deg, #ff7700ff, #d42e00ff);
       color: white;
     }
 
     .btn-demandes {
-      background: linear-gradient(135deg, #c14d42ff, #b02739ff);
+      background: linear-gradient(135deg, #ff2f2fff, #b02c27ff);
       color: white;
     }
 

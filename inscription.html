@@ -85,6 +85,14 @@
             border-color: #721e1e;
             box-shadow: 0 0 15px rgba(30, 60, 114, 0.3);
         }
+
+        /* Messages d'erreur sous les inputs */
+        .error-message {
+            color: red;
+            display: none;
+            font-size: 0.9em;
+            margin-top: 5px;
+        }
         
         button[type="submit"] {
             width: 100%;
@@ -155,22 +163,32 @@
                 <div class="form-group">
                     <label for="nom">Nom</label>
                     <input type="text" name="nom" id="nom" required placeholder="Votre nom">
+                    <span id="nom_error" class="error-message"></span>
                 </div>
 
                 <div class="form-group">
                     <label for="prenom">Prénom</label>
                     <input type="text" name="prenom" id="prenom" required placeholder="Votre prénom">
+                    <span id="prenom_error" class="error-message"></span>
                 </div>
             </div>
 
             <div class="form-group">
                 <label for="email">Adresse Email</label>
                 <input type="email" name="email" id="email" required placeholder="votre@email.com">
+                <span id="email_error" class="error-message"></span>
             </div>
 
             <div class="form-group">
                 <label for="password">Mot de passe</label>
                 <input type="password" name="password" id="password" required placeholder="••••••••">
+                <span id="password_error" class="error-message"></span>
+            </div>
+
+            <div class="form-group">
+                <label for="confirm_password">Confirmer le mot de passe</label>
+                <input type="password" name="confirm_password" id="confirm_password" required placeholder="••••••••">
+                <span id="confirm_password_error" class="error-message"></span>
             </div>
             
             <button type="submit">S'inscrire</button>
@@ -182,15 +200,67 @@
     </div>
 
     <script>
-        // Add subtle input focus animation
-        document.querySelectorAll('input').forEach(input => {
-            input.addEventListener('focus', () => {
-                input.parentElement.style.transform = 'scale(1.02)';
-            });
-            input.addEventListener('blur', () => {
-                input.parentElement.style.transform = 'scale(1)';
-            });
+    document.querySelector("form").addEventListener("submit", function(e) {
+        let isValid = true;
+
+        // Récupérer les inputs
+        const nom = document.getElementById("nom");
+        const prenom = document.getElementById("prenom");
+        const email = document.getElementById("email");
+        const password = document.getElementById("password");
+        const confirm_password = document.getElementById("confirm_password");
+
+        // Fonction utilitaire pour afficher/masquer erreurs
+        function showError(input, message) {
+            const errorSpan = document.getElementById(input.id + "_error");
+            if (message) {
+                errorSpan.textContent = message;
+                errorSpan.style.display = "block";
+                input.style.borderColor = "red";
+            } else {
+                errorSpan.style.display = "none";
+                input.style.borderColor = "#721e1e";
+            }
+        }
+
+        // Réinitialiser erreurs
+        [nom, prenom, email, password, confirm_password].forEach(input => {
+            showError(input, ""); // cacher erreur
         });
+
+        // Vérifier Nom
+        if (!nom.value.trim() || nom.value.length < 2) {
+            showError(nom, "Le nom doit contenir au moins 2 caractères");
+            isValid = false;
+        }
+
+        // Vérifier Prénom
+        if (!prenom.value.trim() || prenom.value.length < 2) {
+            showError(prenom, "Le prénom doit contenir au moins 2 caractères");
+            isValid = false;
+        }
+
+        // Vérifier Email
+        if (!email.value.includes("@")) {
+            showError(email, "Veuillez entrer un email valide");
+            isValid = false;
+        }
+
+        // Vérifier Mot de passe
+        if (password.value.length < 6) {
+            showError(password, "Le mot de passe doit contenir au moins 6 caractères");
+            isValid = false;
+        }
+
+        // Vérifier Confirmation mot de passe
+        if (password.value !== confirm_password.value) {
+            showError(confirm_password, "Les mots de passe ne correspondent pas");
+            isValid = false;
+        }
+
+        // Si pas valide, empêcher l’envoi
+        if (!isValid) e.preventDefault();
+    });
     </script>
 </body>
 </html>
