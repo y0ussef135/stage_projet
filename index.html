@@ -12,6 +12,18 @@
         window.onpopstate = function () {
             window.history.pushState(null, "", window.location.href);
         };
+
+        // Fonction pour afficher un message d'erreur si présent dans l'URL
+        document.addEventListener("DOMContentLoaded", function () {
+            const params = new URLSearchParams(window.location.search);
+            const error = params.get("error");
+            if (error) {
+                const errorBox = document.createElement("div");
+                errorBox.className = "error-message";
+                errorBox.textContent = error;
+                document.querySelector("form").insertBefore(errorBox, document.querySelector("form").firstChild);
+            }
+        });
     </script>
     
     <style>
@@ -25,7 +37,6 @@
             align-items: center;
             justify-content: center;
         }
-        
         .header {
             background: linear-gradient(135deg, #721e1e, #982a2a);
             color: #fff;
@@ -35,7 +46,6 @@
             margin-bottom: 30px;
             box-shadow: 0 4px 12px rgba(0,0,0,0.1);
         }
-        
         form {
             max-width: 500px;
             width: 90%;
@@ -45,7 +55,6 @@
             box-shadow: 0 10px 30px rgba(0,0,0,0.2);
             margin: 20px auto;
         }
-        
         h2 {
             color: #e14d4d;
             text-align: center;
@@ -53,11 +62,9 @@
             font-size: 2rem;
             font-weight: 600;
         }
-        
         .form-group {
             margin-bottom: 25px;
         }
-        
         label {
             display: block;
             margin-bottom: 8px;
@@ -65,7 +72,6 @@
             color: #721e1e;
             font-size: 1.1rem;
         }
-        
         input[type="email"], input[type="password"] {
             width: 100%;
             padding: 15px;
@@ -75,13 +81,11 @@
             transition: all 0.3s ease;
             box-sizing: border-box;
         }
-        
         input[type="email"]:focus, input[type="password"]:focus {
             outline: none;
             border-color: #721e1e;
             box-shadow: 0 0 15px rgba(114, 30, 30, 0.3);
         }
-        
         button[type="submit"] {
             width: 100%;
             padding: 15px;
@@ -95,34 +99,28 @@
             transition: all 0.3s ease;
             box-shadow: 0 4px 15px rgba(30, 60, 114, 0.3);
         }
-        
         button[type="submit"]:hover {
             transform: translateY(-3px);
             box-shadow: 0 8px 25px rgba(30, 60, 114, 0.4);
         }
-        
         p {
             text-align: center;
             margin: 15px 0;
         }
-        
         a {
             color: #e6aeae;
             text-decoration: none;
             font-weight: 500;
             transition: all 0.3s ease;
         }
-        
         a:hover {
             color: #ff4141;
             text-decoration: underline;
         }
-        
         .actions {
             margin-top: 30px;
             text-align: center;
         }
-        
         .actions a {
             background: linear-gradient(135deg, #ff416c, #ff4b2b);
             color: white;
@@ -135,19 +133,26 @@
             display: inline-block;
             box-shadow: 0 4px 15px rgba(255, 65, 108, 0.3);
         }
-        
         .actions a:hover {
             transform: translateY(-3px);
             box-shadow: 0 8px 25px rgba(255, 65, 108, 0.4);
             text-decoration: none;
         }
-        
+        .error-message {
+            background-color: #ffe6e6;
+            color: #d9534f;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            font-weight: 500;
+            text-align: center;
+            border: 1px solid #d9534f;
+        }
         @media (max-width: 768px) {
             form {
                 padding: 25px;
                 margin: 10px;
             }
-            
             h2 {
                 font-size: 1.5rem;
             }
@@ -177,10 +182,10 @@
             <button type="submit">Se connecter</button>
             
             <p>
-                <a href="inscription.html"> Créer un compte</a>
+                <a href="inscription.html">Créer un compte</a>
             </p>
             <p>
-                <a href="oublie.html"> Mot de passe oublié ❓</a>
+                <a href="oublie.html">Mot de passe oublié ❓</a>
             </p>  
             
             <div class="actions">

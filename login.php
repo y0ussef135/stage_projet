@@ -2,12 +2,10 @@
 session_start();
 require_once("include/connection.php");
 
-
 // Désactiver le cache pour empêcher le retour arrière
-header("Cache-Control: no-cache, no-store, must-revalidate"); // HTTP 1.1
-header("Pragma: no-cache"); // HTTP 1.0
-header("Expires: 0"); // Proxies
-
+header("Cache-Control: no-cache, no-store, must-revalidate");
+header("Pragma: no-cache");
+header("Expires: 0");
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = $_POST['email'] ?? '';
@@ -22,11 +20,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $stmt->close();
 
     if ($user) {
+        // Vérifier si le compte est verrouillé
         if ($user['Etat'] === 'vérrouillé') {
-            echo "<script>alert('Votre compte est désactivé. Veuillez contacter le support.'); window.location.href='index.html';</script>";
+            header("Location: index.html?error=" . urlencode("Votre compte est désactivé. Veuillez contacter le support."));
             exit();
         }
 
+        // Vérification du mot de passe
         if (password_verify($password, $user['password'])) {
             // Authentification réussie
             $_SESSION['user_id'] = $user['id'];
@@ -34,6 +34,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $_SESSION['date_creation'] = $user['date_creation'];
             $_SESSION['role'] = $user['role'];
             $_SESSION['email'] = $user['email'];
+
             // Réinitialiser les tentatives
             $reset = $conn->prepare("UPDATE user SET nb_cnx = 0 WHERE email = ?");
             $reset->bind_param("s", $email);
@@ -41,16 +42,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $reset->close();
 
             // Redirection selon le rôle
-           
-        if ($user['role'] === 'admin') {
-            header("Location: admin_home.php");
-}        else {
-             header("Location: client_ACCUEIL.php"); 
-}
-
+            if ($user['role'] === 'admin') {
+                header("Location: admin_home.php");
+            } else {
+                header("Location: client_ACCUEIL.php");
+            }
             exit();
+
         } else {
-            // Mauvais mot de passe
+            // Mauvais mot de passe → Incrémenter tentatives
             $fail = $conn->prepare("UPDATE user SET nb_cnx = nb_cnx + 1 WHERE email = ?");
             $fail->bind_param("s", $email);
             $fail->execute();
@@ -70,15 +70,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $lock->execute();
                 $lock->close();
 
-                echo "<script>alert('Votre compte a été désactivé après 3 tentatives échouées.'); window.location.href='index.html';</script>";
+                header("Location: index.html?error=" . urlencode("Votre compte a été désactivé après 3 tentatives échouées."));
                 exit();
             } else {
-                echo "<script>alert('Email ou mot de passe incorrect.'); window.location.href='index.html';</script>";
+                header("Location: index.html?error=" . urlencode("Email ou mot de passe incorrect."));
                 exit();
             }
         }
     } else {
-        echo "<script>alert('Email non trouvé.'); window.location.href='index.html';</script>";
+        // Email non trouvé
+        header("Location: index.html?error=" . urlencode("Email non trouvé."));
         exit();
     }
 }
